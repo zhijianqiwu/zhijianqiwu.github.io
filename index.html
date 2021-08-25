@@ -148,6 +148,189 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据结构与算法先导思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%88%E5%AF%BC%E6%80%9D%E6%83%B3/">数据结构与算法先导思想</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%88%E5%AF%BC%E6%80%9D%E6%83%B3/" class="archive-article-date">
+  	<time datetime="2021-08-25T11:42:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="框架思维"><a href="#框架思维" class="headerlink" title="框架思维"></a>框架思维</h1><h2 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1.数据结构"></a>1.数据结构</h2><p>数据结构的存储方式从底层来说其实只有两种：数组（线性）和链表（非线性）。<br>其他的数据结构，例如图、树、堆栈都属于”上层结构”，是在数组和链表的基础上产生的，它们都是对数组和链表进行了一些特殊操作，API接口各不相同的数据结构。对于这些数据结构，都可以基于数组和链表实现，也就是说它们的底层的存储方式都至少有两种（数组和链表），我们要根据存储数据的实际情况使用合适的存储方式。</p>
+<h3 id="数组和链表的优缺点"><a href="#数组和链表的优缺点" class="headerlink" title="数组和链表的优缺点"></a>数组和链表的优缺点</h3><p><strong>数组</strong><br>数据连续存储，节约存储空间，根据数组索引可以随机快速访问、修改数据，但由于创建时需要确定数组的大小，故存在扩容缩容问题。而且需要在数组中进行删除或增添数据时，需要将增删的后面的数据位置全部移位以保持连续。</p>
+<p><strong>链表</strong><br>数据随机存储，不连续，而是靠指针指向下一个数据的位置，不限制存储的数据大小，可随意增删数据，增删操作不需要移动其他数据位置，只需要修改几个指针。但由于需要保存链表指针，故所需存储空间大，而且由于随机存储则不能根据索引值直接访问、修改数据。</p>
+<hr>
+<h2 id="2-数据结构的基本操作"><a href="#2-数据结构的基本操作" class="headerlink" title="2.数据结构的基本操作"></a>2.数据结构的基本操作</h2><p>各种数据结构只是一些存储数据的工具，使用不同的数据结构也是为了更高效的对数据进行操作，最基本的操作就是<strong>增删查改</strong>。<br>便利+查找，概括性归纳为两种，线性的和非线性的。<br>线性的是以for/while迭代为代表，非线性是以递归为代表。其中的各种数据结构的遍历框架如下：</p>
+<p>数组的遍历框架，典型的线性迭代结构： </p>
+<pre><code>void travers(int arr[]，int arrSize)&#123;  
+   for (int i=0;i&lt;arrSize;i++)
+      //迭代访问arr[i]
+    &#125;
+</code></pre>
+<p> 链表的遍历框架,分为迭代和递归框架</p>
+<pre><code> struct  ListNode&#123;
+     int val;
+     ListNode *next;
+ &#125;//链表节点
+
+ void traverse(ListNode *head)&#123;
+ for(ListNode *p=head;p!=NULL;p=p-&gt;next)
+   //迭代访问p.val
+ &#125;
+
+ void traverse(ListNode *head)&#123;
+  //递归访问head.val
+  traverse(head-&gt;next);
+ &#125;
+</code></pre>
+<p>二叉树便利，典型的非线性递归结构  </p>
+<pre><code>class TreeNode&#123;
+  int val;
+  TreeNode *left,*right;
+&#125;
+
+void traverse(TreeNode *root)&#123;
+  traverse(root-&gt;left);
+  traverse(root-&gt;right);
+&#125;
+</code></pre>
+<p>可见链表和二叉树的递归遍历结构相似，一叉树实际上就是链表，故N叉树的递归遍历结构可得为：</p>
+<pre><code>class TreeNode&#123;
+  int val;
+  int childrenSum;
+  TreeNode *children[];
+&#125;
+
+void traverse(TreeNode *root)&#123;
+  for(int i=0;i&lt;childrenSum;i++)
+    traverse(root-&gt;children[i]);
+&#125;
+</code></pre>
+<p>N叉树拓展又出现了图，对图的遍历也是基于上述框架，只是需要Visit数组去标记图中的环，防止出现重复访问。</p>
+<h2 id="3-最后"><a href="#3-最后" class="headerlink" title="3.最后"></a>3.最后</h2><p>数据结构是工具，算法是通过合适的工具解决特定问题的方法，要想学好数据结构和算法，就需要利用框架性的思维去学习。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%88%E5%AF%BC%E6%80%9D%E6%83%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二分查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="archive-article-date">
+  	<time datetime="2021-08-24T13:59:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-search/">题目链接</a></p>
+<blockquote>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返&gt;回 -1。</p>
+</blockquote>
+<h2 id="第一种解法"><a href="#第一种解法" class="headerlink" title="第一种解法"></a>第一种解法</h2><h3 id="解题："><a href="#解题：" class="headerlink" title="解题："></a>解题：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int search(int* nums, int numsSize, int target)&#123;  </span><br><span class="line"> int top=numsSize-1,down=0;  </span><br><span class="line"> int tmp=-1;  </span><br><span class="line"> while(top&gt;=down)&#123;  </span><br><span class="line">  int mid=(top+down)/2;  </span><br><span class="line">  if(target==nums[mid])  </span><br><span class="line">   &#123;  </span><br><span class="line">    tmp=mid;  </span><br><span class="line">    break;  </span><br><span class="line">   &#125;  </span><br><span class="line">   else if(nums[mid]&lt;target)  down=mid+1;  </span><br><span class="line">   else  top=mid-1;  </span><br><span class="line">   &#125;  </span><br><span class="line"> return tmp;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>1.tmp变量可以不创建，直接使用mid当做结果返回<br>2.防止变量过大时溢出：在 int mid=(top+down)/2中，当top和dowm都是较大整数，相加可能会溢出，因此要避免出现两个未确定范围的数的直接相加 ，本题优化为：int mid=down+(top-down)/2;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Markdown 编写规范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -168,8 +351,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="熟悉markdown文章编写"><a href="#熟悉markdown文章编写" class="headerlink" title="熟悉markdown文章编写"></a>熟悉markdown文章编写</h1><p>文章预览按ctrl+shift+p，然后输入markdowm，选择文章预览</p>
+        <h1 id="熟悉markdown文章编写"><a href="#熟悉markdown文章编写" class="headerlink" title="熟悉markdown文章编写"></a>熟悉markdown文章编写</h1><p>文章预览按ctrl+shift+p，然后输入markdowm，选择文章预览</p>
 <h2 id="1-使用标题需要使用-号"><a href="#1-使用标题需要使用-号" class="headerlink" title="1.使用标题需要使用#号"></a>1.使用标题需要使用#号</h2><p>#一级标题<br>##二级标提<br>###三级标题<br>####四级标题<br>#####五级标题<br>######六级标题<br>换行按两个空格</p>
 <h2 id="2-段落前后保留一个空行"><a href="#2-段落前后保留一个空行" class="headerlink" title="2.段落前后保留一个空行"></a>2.段落前后保留一个空行</h2><h2 id="3-自动生成目录"><a href="#3-自动生成目录" class="headerlink" title="3.自动生成目录"></a>3.自动生成目录</h2><p>[TOC] 会自动为当前文档生成目录，目录是根据当前文档中的标题来生成的。</p>
 <p>[TOC] 写在文档的什么位置（一般是文档开头），目录就会插在文档的哪个位置。</p>
