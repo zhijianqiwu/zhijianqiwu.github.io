@@ -53,15 +53,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/%20%7C%7C%20home">home</a></li>
+				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/about/%20%7C%7C%20user">about</a></li>
-	        
-				<li><a href="/categories/%20%7C%7C%20th">categories</a></li>
-	        
-				<li><a href="/tags/%20%7C%7C%20tags">tags</a></li>
-	        
-				<li><a href="/archives/%20%7C%7C%20archive">archives</a></li>
+				<li><a href="/archives/index.html">归档</a></li>
 	        
 			</ul>
 		</nav>
@@ -117,12 +111,6 @@
 			
 				
 			
-				
-			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -138,18 +126,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 20%"><a href="/%20%7C%7C%20home">home</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/about/%20%7C%7C%20user">about</a></li>
-		        
-					<li style="width: 20%"><a href="/categories/%20%7C%7C%20th">categories</a></li>
-		        
-					<li style="width: 20%"><a href="/tags/%20%7C%7C%20tags">tags</a></li>
-		        
-					<li style="width: 20%"><a href="/archives/%20%7C%7C%20archive">archives</a></li>
+					<li style="width: 50%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -165,6 +147,148 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-二叉树详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%A6%E8%A7%A3/">二叉树详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2021-08-25T12:45:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+<p>[toc]</p>
+<h2 id="二叉树深度"><a href="#二叉树深度" class="headerlink" title="二叉树深度"></a>二叉树深度</h2><h2 id="二叉树构造"><a href="#二叉树构造" class="headerlink" title="二叉树构造"></a>二叉树构造</h2><h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><h3 id="先序、后序、中序遍历"><a href="#先序、后序、中序遍历" class="headerlink" title="先序、后序、中序遍历"></a>先序、后序、中序遍历</h3><ul>
+<li><p>递归法，采用了深度优先遍历（DFS)</p>
+<p>  void DFS（struct TreeNode *root){<br>  //先序遍历代码<br>  DFS(root-&gt;left);<br>  //中序遍历代码<br>  DFS(root-&gt;right)<br>  //后序遍历代码<br>  }</p>
+</li>
+<li><p>堆栈法</p>
+</li>
+<li><p><strong>颜色标记法</strong>  </p>
+<blockquote>
+<p>这种方法兼具了堆栈的高效率和递归的通俗易懂，对于树的三种遍历，代码几乎一样，只需修改节点入栈的顺序。<br>其核心思想如下：<br>使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。<br>如果遇到的节点为白色，则将其标记为灰色，然后将其右子节点、自身、左子节点入栈。<br>如果遇到的节点为灰色，则将节点的值输出。</p>
+</blockquote>
+</li>
+</ul>
+<p>如下，用颜色标记法对二叉树进行中序遍历：</p>
+<pre><code>int* inorderTraversal(struct TreeNode* root, int* returnSize)&#123;
+  *returnSize = 0;
+  int* res = malloc(sizeof(int)*501);
+//建立堆栈
+struct TreeNode** node = malloc(sizeof(struct TreeNode*)*501);
+int top = -1;
+int* colors=malloc(sizeof(int)*510);
+ //根节点入栈
+node[++top]=root;
+colors[top]=1;
+while(top&gt;=0)&#123;   
+ int color=colors[top];
+ struct TreeNode *t=node[top--];
+ if(t==NULL) continue;
+ if(color==1)&#123;
+     //右节点、本身、左节点依次入栈
+   node[++top]=t-&gt;right;
+   colors[top]=1;
+   node[++top]=t;
+   colors[top]=0;
+   node[++top]=t-&gt;left;
+   colors[top]=1;
+ &#125;else res[(*returnSize)++]=t-&gt;val;
+&#125;
+return res;
+&#125;
+</code></pre>
+<p>其中若是先序遍历，节点入栈顺序就是右节点，左节点，本身。后序遍历就是本身，右节点，左节点。</p>
+<h3 id="3-层次遍历"><a href="#3-层次遍历" class="headerlink" title="3.层次遍历"></a>3.层次遍历</h3><blockquote>
+<p>将树分层，一层层从左到右依次遍历树节点<br>若要求输出是一维数组，则可直接使用BFS。</p>
+</blockquote>
+<blockquote>
+<p>若要求输出的是二维数组，则需要计算每层节点的数量，在BFS算法上进行修改。  </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/">相应leetcode题</a><br>如下为要求输出的二维数组的层次遍历：    </p>
+<pre><code>#define max 10000
+int** levelOrder(struct TreeNode* root, int* returnSize, int** returnColumnSizes)&#123;
+  *returnSize=0;
+  *returnColumnSizes=(int *)malloc(sizeof(int)*max);
+   int** res=malloc(sizeof(int*)*max);
+  struct TreeNode** queue=malloc(sizeof(struct TreeNode*)*max);
+   int front=0,rear=0;
+   if(root==NULL) return NULL;
+   queue[rear++]=root;
+   while(front!=rear)&#123;
+      int size=rear-front;
+      res[*returnSize]=malloc(sizeof(int)*size);
+      for(int i=0;i&lt;size;i++)&#123;
+      struct TreeNode *t=queue[front++];
+      res[*returnSize][i]=t-&gt;val;
+      if(t-&gt;left!=NULL) 
+        queue[rear++]=t-&gt;left;
+      if(t-&gt;right!=NULL) 
+        queue[rear++]=t-&gt;right;
+   &#125;
+     (*returnColumnSizes)[(*returnSize)++]=size;
+  &#125;
+return res;
+&#125;
+</code></pre>
+<blockquote>
+<p>锯齿形层序遍历: 即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行    </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">相应leetcode题</a></p>
+<p>这只需通过一个变量来判断是否是从左往右遍历，然后在将变量放入数组时选择从头或尾放入。    </p>
+<h2 id="二叉树路径和"><a href="#二叉树路径和" class="headerlink" title="二叉树路径和"></a>二叉树路径和</h2><h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><h3 id="数组转换成二叉搜索树"><a href="#数组转换成二叉搜索树" class="headerlink" title="数组转换成二叉搜索树"></a>数组转换成二叉搜索树</h3><h3 id="链表转换成二叉搜索树"><a href="#链表转换成二叉搜索树" class="headerlink" title="链表转换成二叉搜索树"></a>链表转换成二叉搜索树</h3><h3 id="第k小元素"><a href="#第k小元素" class="headerlink" title="第k小元素"></a>第k小元素</h3><h3 id="最近公共祖先"><a href="#最近公共祖先" class="headerlink" title="最近公共祖先"></a>最近公共祖先</h3><h2 id="二叉平衡树"><a href="#二叉平衡树" class="headerlink" title="二叉平衡树"></a>二叉平衡树</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-数据结构与算法先导思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -253,6 +377,75 @@ void traverse(TreeNode *root)&#123;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/08/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%85%88%E5%AF%BC%E6%80%9D%E6%83%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二分查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找详解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="archive-article-date">
+  	<time datetime="2021-08-24T13:59:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-search/">题目链接</a></p>
+<blockquote>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返&gt;回 -1。</p>
+</blockquote>
+<h2 id="第一种解法"><a href="#第一种解法" class="headerlink" title="第一种解法"></a>第一种解法</h2><h3 id="解题："><a href="#解题：" class="headerlink" title="解题："></a>解题：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int search(int* nums, int numsSize, int target)&#123;  </span><br><span class="line"> int top=numsSize-1,down=0;  </span><br><span class="line"> int tmp=-1;  </span><br><span class="line"> while(top&gt;=down)&#123;  </span><br><span class="line">  int mid=(top+down)/2;  </span><br><span class="line">  if(target==nums[mid])  </span><br><span class="line">   &#123;  </span><br><span class="line">    tmp=mid;  </span><br><span class="line">    break;  </span><br><span class="line">   &#125;  </span><br><span class="line">   else if(nums[mid]&lt;target)  down=mid+1;  </span><br><span class="line">   else  top=mid-1;  </span><br><span class="line">   &#125;  </span><br><span class="line"> return tmp;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>1.tmp变量可以不创建，直接使用mid当做结果返回<br>2.防止变量过大时溢出：在 int mid=(top+down)/2中，当top和dowm都是较大整数，相加可能会溢出，因此要避免出现两个未确定范围的数的直接相加 ，本题优化为：int mid=down+(top-down)/2;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">展开全文 >></a>
         </p>
       
 
