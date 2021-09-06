@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 算法与数据结构 | Hexo</title>
+  <title>c++ prime笔记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+  <meta name="description" content="数据类型是程序的基础，它告诉我们数据的意义和能在数据上进行的操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ prime笔记">
+<meta property="og:url" content="http://example.com/2021/09/06/c-%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据类型是程序的基础，它告诉我们数据的意义和能在数据上进行的操作。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-06T00:55:48.000Z">
+<meta property="article:modified_time" content="2021-09-06T02:35:45.173Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -152,174 +157,253 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-c-内置类型" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c++ prime笔记
+    </h1>
+  
+
+        
+        <a href="/2021/09/06/c-%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2021-09-06T00:55:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据类型是程序的基础，它告诉我们数据的意义和能在数据上进行的操作。</p>
+<span id="more"></span>
+<h1 id="第二章-变量和基本类型"><a href="#第二章-变量和基本类型" class="headerlink" title="第二章 变量和基本类型"></a>第二章 变量和基本类型</h1><h2 id="2-1基本内置类型"><a href="#2-1基本内置类型" class="headerlink" title="2.1基本内置类型"></a>2.1基本内置类型</h2><p>c++基本内置类型包含两类：<em>算术类型</em>和<em>空类型</em></p>
+<h3 id="2-1-1算术类型"><a href="#2-1-1算术类型" class="headerlink" title="2.1.1算术类型"></a>2.1.1算术类型</h3><p>算术类型分为两类：整型（包括布尔型和字符）和浮点型。不同算术类型的数据所占的比特数在不同机器上有差别。</p>
+<ul>
+<li>整形    </li>
+</ul>
+<ol>
+<li>布尔型（bool），取值为false或true。   </li>
+<li>字符型（char），一个char的大小和一个机器字节一样。char被分为chat，unsigned char和signed char三种，但字符的表现形式只有两种，带符号和无符号，char实际上会表示为上述两种形式的一种。    </li>
+<li>其他整形（short、int、long、long long），用于表示不同尺寸的整数，分为带符号的和无符号。带符号可表示正数、负数、0，无符号类型只能表示大于等于0的值。其中，short、int、long、long long都是带符号的，前面加上unsigned表示为无符号类型。</li>
+</ol>
+<ul>
+<li>浮点型（float、double、long fouble）<br>浮点型可表示单精度、双精度和拓展精度值。 它们的区别在于浮点数有效位数的不同。</li>
+</ul>
+<blockquote>
+<p>类型选择：    </p>
+</blockquote>
+<ol>
+<li>当明确数值不可能为负值时，选用无符号类型。</li>
+<li>使用int 执行整数运算，当超过int表示范围，选用long long。</li>
+<li>执行浮点数运算选用double</li>
+<li>算术运算中不要使用char和bool，当要表示一个特别小的数值时，选用unsigned char或者signed char。</li>
+</ol>
+<h3 id="2-1-2类型转换"><a href="#2-1-2类型转换" class="headerlink" title="2.1.2类型转换"></a>2.1.2类型转换</h3><ul>
+<li>当赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号表示数值总数取模后的余数。<blockquote>
+<p>8比特大小的unsigne char，表示范围为0-255区间内的值，它的表示数组总数为256，则当赋给它不在0-255区间内的值，实际的结果为该值对256取模后的余数。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>取模运算：<br>假设有整数a和b，那么取模/取余运算可以分为两步运算：<br>求整数商：c = a/b;<br>计算模/余数：r = a - (c*b);<br>总计算模/余数：a mod b = a - b[a/b] ([a/b]表示整数商)，按照商取小原则，即为1.2=1，-1.2=-1。</p>
+</blockquote>
+<ul>
+<li><p>当赋给带符号数类型一个超出它表示范围的值时，结果是未定义的。</p>
+</li>
+<li><p>当表达式既有无符号类型又有带符号类型，这时带符号类型取值为负会有异常结果。</p>
+</li>
+</ul>
+<h3 id="2-1-3字面值常量"><a href="#2-1-3字面值常量" class="headerlink" title="2.1.3字面值常量"></a>2.1.3字面值常量</h3><p>每个字面值常量都对应一种数据类型。</p>
+<ul>
+<li>整形和浮点型字面值    <ol>
+<li>整形字面值可以写作十进制，八进制（以0开头），十六进制（以0x开头）。默认情况下，十进制是带符号类型，八进制和十六进制是无符号类型或者带符号类型。需要注意的是，尽管整形字面值可以存储在带符号数据类型，但严格来说，十进制字面值不会是负值，形如-42的负十进制字面值，前面的负号不在字面值之内，它的作用是对子面值取负。</li>
+<li>浮点型字面值表现为一个小数或者科学计数法表示的指数，指数部分用e或E标识，默认为double型。</li>
+</ol>
+</li>
+<li>字符和字符型字面值<ol>
+<li>char型字面值：由单引号括起来的字符。</li>
+<li>字符串型字面值：双引号括起的零个或多个字符。</li>
+</ol>
+</li>
+<li>转义序列</li>
+<li>指定字面值的类型</li>
+<li>布尔字面值和指针字面值</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zfb.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinF.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/28/%E9%80%92%E5%BD%92/" class="archive-article-date">
-  	<time datetime="2021-08-28T12:17:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/28/%E9%80%92%E5%BD%92/">递归</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法与数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/06/c-%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/28/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-08-28T12:05:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-28</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/09/06/%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          什么是计算机网络？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/29/C-%E5%B0%8F%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++小知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/28/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法与数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">第二章 变量和基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">2.1基本内置类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1%E7%AE%97%E6%9C%AF%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">2.1.1算术类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.1.2类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3%E5%AD%97%E9%9D%A2%E5%80%BC%E5%B8%B8%E9%87%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.1.3字面值常量</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2021-08-25T12:45:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-25</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/25/%E4%BA%8C%E5%8F%89%E6%A0%91%E8%AF%A6%E8%A7%A3/">二叉树详解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法与数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="archive-article-date">
-  	<time datetime="2021-08-24T13:59:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/24/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找详解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法与数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -342,9 +426,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
